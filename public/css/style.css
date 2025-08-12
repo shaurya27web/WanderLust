@@ -27,4 +27,28 @@
 .f-info{
     height:8rems;
     display:flex;
+    background-color: #ebebeb;
+    flex-wrap:wrap;
+    justify-content: center;
+    align-items: space-evenly;
+    text-align:center;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand{
+    width: 100%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials{
+    font-size: 1.2rem;
+    margin-right:1rem;
+}
+
+
+.f-info-links a:hover{
+    text-decoration: underline;
 }
