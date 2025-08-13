@@ -1,31 +1,30 @@
 <% layout("layout/boilerplate") -%>
-<body>
-    <h3>All Listings</h3>
-    <form method="GET" action="listings/new">
-        <!-- <button>Create New Listing</button> -->
-    </form>
-    <!-- creating row to display cards in an uneven format -->
-    <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1">
-<% for(let listing of allListing){ %>
-    <a href="/listings/<%=listing._id %>" class="listing-link">
-<div class="card col" >
- <img src="<%= listing.image.url %>"
-  alt="<%= listing.title %>" 
-  class="card-image-top"
-   style="height:20 rem">
-<div class="card-image-overlay"></div>
-  <div class="card-body">
-    <h5 class="card-title">
-        <%= listing.title %></h5>
-    <p class="card-text">
-        <br>
-            &#8377;<%= listing.price%>/night
-    </p>
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-  </div>
-</div><%}%>
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-success">All Listings</h2>
+        <a href="/listings/new" class="btn btn-success rounded-pill px-4">
+            <i class="bi bi-plus-lg"></i> Create New Listing
+        </a>
     </div>
 
-    </a>
-    
-</body>
+    <div class="row row-cols-lg-3 row-cols-md-2 row-cols-sm-1 g-4">
+ <% for(let listing of allListing){ %>
+ <div class="col">
+<a href="/listings/<%= listing._id %>" class="text-decoration-none text-dark">
+ <div class="card h-100 shadow-sm listing-card">
+  <img src="<%= listing.image.url %>" 
+  alt="<%= listing.title %>" 
+ class="card-img-top listing-img">
+   <div class="card-body">
+  <h5 class="card-title mb-2"><%= listing.title %></h5>
+ <p class="card-text text-muted mb-1">
+  ₹<%= listing.price.toLocaleString("en-IN") %> / night
+  </p>
+ </div>
+ </div>
+ </a>
+   </div>
+ <% } %>
+    </div>
+</div>

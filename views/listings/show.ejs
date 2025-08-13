@@ -1,19 +1,37 @@
 <% layout("layout/boilerplate") -%>
-<body>
-<h3>Listing Details: </h3>    
-<ul>
-    <li> <%=listing.title %></li>
-    <li> <%=listing.description %></li>
-    <li> &#x20B9;<%=listing.price.toLocaleString("en-IN") %></li>
-    <li> <%=listing.location %></li>
-    <li> <%=listing.country %></li>
-</ul>
-<br>
-<a href="/listings/<%=listing._id%>/edit">Edit this Listing</a>
-<br><br>
-<form method="POST" action="/listings/<%=listing._id%>?_method=DELETE">
-    <button>
-        Delete
-    </button>
-</form>
-</body>
+
+<div class="container mt-5">
+    <h2 class="mb-4 text-center">Listing Details</h2>
+
+    <div class="row g-4">
+        <!-- Left: Image -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0">
+                <img src="<%= listing.image.url %>" 
+                     class="card-img-top show-img" 
+                     alt="<%= listing.title %>">
+            </div>
+        </div>
+
+        <!-- Right: Details -->
+        <div class="col-md-6">
+            <div class="card shadow-sm border-0 p-4">
+                <h3 class="card-title mb-3"><%= listing.title %></h3>
+                <p class="card-text text-muted"><%= listing.description %></p>
+                <p class="price-tag">₹<%= listing.price.toLocaleString("en-IN") %></p>
+                <p><i class="bi bi-geo-alt-fill text-danger"></i> <%= listing.location %>, <%= listing.country %></p>
+
+                <div class="d-flex gap-3 mt-4">
+                    <a href="/listings/<%= listing._id %>/edit" class="btn btn-warning">
+                        <i class="bi bi-pencil-square"></i> Edit
+                    </a>
+                    <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="m-0">
+                        <button type="submit" class="btn btn-danger">
+                            <i class="bi bi-trash"></i> Delete
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

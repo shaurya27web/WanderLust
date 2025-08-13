@@ -13,7 +13,6 @@ app.engine("ejs",ejsMate);
 app.use(express.static(path.join(__dirname,"/public")));
 
 
-
 //Mongo DB connectivity
 const MONGO_URL="mongodb://127.0.0.1:27017/wanderlust"
 async function main(){
@@ -74,11 +73,24 @@ app.get("/listings/:id/edit",async (req,res)=>{
 });
 
 //Update Route
-app.put("/listings/:id",async(req,res)=>{
-     let {id}=req.params;
-    const listing=await Listing.findByIdAndUpdate(id,{...req.body.listing});
-    res.redirect("/listings");
-})
+app.put("/listings/:id", async (req, res) => {
+  const { id } = req.params;
+  const { listing } = req.body;
+
+  await Listing.findByIdAndUpdate(id, {
+    $set: {
+      title: listing.title,
+      description: listing.description,
+      price: listing.price,
+      location: listing.location,
+      country: listing.country,
+      "image.url": listing.image.url,
+    }
+  });
+
+  res.redirect("/listings");
+});
+
 
 //Deletion of listing
 app.delete("/listings/:id",async(req,res)=>{
@@ -102,3 +114,4 @@ app.listen(8080,()=>{
 //EJS templating
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
+
