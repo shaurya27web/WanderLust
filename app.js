@@ -8,6 +8,7 @@ const ejsMate=require("ejs-mate");
 const Listing=require("./models/listing.js");
 const wrapAsync=require("./utils/wrapAsync.js");
 const ExpressError=require("./utils/ExpressError.js");
+const {listingSchema}=require("./schema.js");
 
 app.engine("ejs",ejsMate);
 app.set("view engine","ejs");
@@ -37,6 +38,17 @@ app.get("/",(req,res)=>{
     res.send("Hi I am root");
 });
 
+const validateListing = (req, res, next) => {
+  const { error } = listingSchema.validate(req.body);
+  if (error) {
+    const errMsg = error.details.map((el) => el.message).join(",");
+    throw new ExpressError(400, errMsg);
+  } else {
+    next();
+  }
+};
+
+
 //listing request(Index Route)
 app.get("/listings",wrapAsync(async(req,res)=>{
     const allListing=await Listing.find({});
@@ -51,10 +63,8 @@ app.get("/listings/new",wrapAsync(async(req,res)=>{
 
 
 //Post Route for adding new list
-app.post("/listings",wrapAsync(async(req,res,next)=>{
-    if(!req.body.listing){
-        throw new ExpressError(400,"Send valid data for listing");
-    }
+app.post("/listings",validateListing
+    ,wrapAsync(async(req,res,next)=>{
  const newListing=new Listing(req.body.listing);
     console.log(newListing);
     await newListing.save();
@@ -71,7 +81,8 @@ app.get("/listings/:id/edit",wrapAsync(async(req,res)=>{
 }));
 
 //Update Route
-app.put("/listings/:id",wrapAsync(async(req, res) => {
+app.put("/listings/:id",validateListing,
+    wrapAsync(async(req, res) => {
   const { id } = req.params;
   const { listing } = req.body;
 
@@ -113,8 +124,8 @@ app.get("/listings/:id",wrapAsync(async(req,res)=>{
 //Error handelling middleware
 app.use((err,req,res,next)=>{
     let {statusCode=500,message="Something went Wrong!"}=err;
-    res.status(statusCode).send(message);
-    res.render("listings/error.ejs");
+    res.status(statusCode).render("listings/error.ejs",{message});
+
 });
 
 
