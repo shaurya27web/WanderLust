@@ -124,3 +124,28 @@ h2, h3 {
     font-weight: 600;
     color: #1b4332;
 }
+
+/* review page */
+.review-card {
+  background: #fff;
+  transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+.review-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+
+.delete-btn {
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+.delete-btn:hover {
+  background-color: #dc3545; /* Bootstrap danger red */
+  color: #fff;
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
+}
