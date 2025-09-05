@@ -149,3 +149,8 @@ h2, h3 {
   transform: scale(1.05);
   box-shadow: 0 4px 12px rgba(220, 53, 69, 0.4);
 }
+
+/* map style */
+#map { height:300px;
+width:800px;
+border-radius:7%; }

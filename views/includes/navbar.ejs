@@ -1,37 +1,58 @@
-<nav class="navbar navbar-expand-lg bg-body-light border-bottom sticky-top">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="/"><i class="fa-solid fa-compass"></i></a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+<nav class="navbar navbar-expand-lg bg-white border-bottom sticky-top shadow-sm">
+  <div class="container-fluid px-4">
+
+    <!-- Brand -->
+    <a class="navbar-brand fw-bold d-flex align-items-center" href="/listings">
+      <i class="fa-solid fa-compass text-danger me-2"></i> Wanderlust
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/">Home</a>
+    <!-- Center Search/Links -->
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav rounded-pill border px-3 py-1 shadow-sm bg-light">
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/listings">
+            <i class="fa-solid fa-house me-1"></i> Home
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listings">All Listings</a>
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/listings">
+            <i class="fa-solid fa-map-location-dot me-1"></i> All Wonders
+          </a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="/listings/new">New Listing</a>
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/listings/new">
+            <i class="fa-solid fa-plus-circle me-1"></i> New Wonder
+          </a>
         </li>
-      </ul>
-
-      <ul class="navbar-nav ms-auto">
-        <% if (!currUser) { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/login">Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/signup">SignUp</a>
-          </li>
-        <% } else { %>
-          <li class="nav-item">
-            <a class="nav-link" href="/logout">Logout</a>
-          </li>
-        <% } %>
       </ul>
     </div>
+
+    <!-- Right Side Auth -->
+    <ul class="navbar-nav ms-auto d-flex align-items-center">
+      <% if (!currUser) { %>
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/login">
+            <i class="fa-solid fa-right-to-bracket me-1"></i> Login
+          </a>
+        </li>
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/signup">
+            <i class="fa-solid fa-user-plus me-1"></i> Sign Up
+          </a>
+        </li>
+      <% } else { %>
+        <li class="nav-item mx-2">
+          <a class="nav-link d-flex align-items-center" href="/logout">
+            <i class="fa-solid fa-right-from-bracket me-1"></i> Logout
+          </a>
+        </li>
+      <% } %>
+    </ul>
   </div>
 </nav>
